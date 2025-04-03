@@ -1,29 +1,28 @@
-import networkx as nx
 import json
+import networkx as nx
+import matplotlib.pyplot as plt
+
 
 def graph_reader(path):
-    # "simple_graph_bidirectionsl.json"
+    # Load JSON data
+    # file_path = r"C:\Users\Yashwardhan\Desktop\Revive\revive\repo\simple_graph_bidirectionsl.json"
     with open(path, "r") as f:
         data = json.load(f)
 
-    # Create a MultiDiGraph to allow multiple directed edges between nodes
-    G = nx.MultiDiGraph()
-        
-    # Add nodes
-    alias_map = {}
+    # Create an undirected graph
+    G = nx.Graph()
+
+    # Add nodes with attributes
     for node in data["nodes"]:
-        pub_key = node["pub_key"]
-        alias = node["alias"]
-        G.add_node(node["pub_key"], alias=node["alias"])
-        alias_map[pub_key] = alias 
+        G.add_node(node["pub_key"],
+                alias=node["alias"],
+                color=node["color"])
 
-    # Add edges with capacities (support multiple edges)
+    # Add edges with attributes
     for edge in data["edges"]:
-        node1 = edge["node1_pub"]
-        node2 = edge["node2_pub"]
-        channel_id = edge["channel_id"]
-        capacity = int(edge["capacity"])  # Convert from string to int
-            
-        G.add_edge(node1, node2, key=channel_id, capacity=capacity)
-
+        G.add_edge(edge["node1_pub"],
+                    edge["node2_pub"],
+                    channel_id=edge["channel_id"],
+                    capacity=edge["capacity"])
+    
     return G

@@ -1,7 +1,9 @@
 import graph_display
 import graph_reader
 
-G = graph_reader.graph_reader(r"C:\Users\Yashwardhan\Desktop\Revive\revive\repo\simple_graph_bidirectionsl.json")
+G = graph_reader.graph_reader(r"C:\Users\Yashwardhan\Desktop\Revive\revive\repo\simple_graph.json")
+
+print(G.edges,"\n\n" ,G.nodes)
 
 graph_display.draw_graph(G, "Initial Graph")
 
