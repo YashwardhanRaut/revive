@@ -1,0 +1,5 @@
+In order to simulate the depletion of channels and in order to determine and compare the difference between the two algorithms and how they will differ,
+
+1. We can do two things either consider any p% percentage of edges using random sampling and deplete them in one direction.
+2. Second is to consider node centrality and focus transactions on central nodes more and hence they get depleated more frequently.
+3. Thirs is to consider channel capacity to distribute depletion probability.
