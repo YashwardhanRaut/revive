@@ -1,17 +1,10 @@
 import networkx as nx
+from pulp import LpProblem, LpVariable, LpMaximize, LpStatus
 
 def find_cycles(G):
-    # Assuming G is your directed graph
     cycles = list(nx.simple_cycles(G))
-
-    # Filter cycles with length >= 3 (optional)
     valid_cycles = [cycle for cycle in cycles if len(cycle) >= 3]
-
     return valid_cycles
-# print("Found cycles:")
-# for c in valid_cycles:
-#     print(c)
-
 
 def find_cycles_with_depleted_edge(G):
     all_cycles = list(nx.simple_cycles(G))
@@ -19,67 +12,80 @@ def find_cycles_with_depleted_edge(G):
 
     for cycle in all_cycles:
         if len(cycle) < 3:
-            continue  # skip short cycles
-
-        # Build edge list for this cycle
+            continue
         edges = [(cycle[i], cycle[(i + 1) % len(cycle)]) for i in range(len(cycle))]
-
-        # Check if at least one edge has balance 0
         has_depleted_edge = any(G[u][v]['weight'] == 0 for u, v in edges)
         if has_depleted_edge:
             filtered_cycles.append(cycle)
 
     return filtered_cycles
 
-
-from pulp import LpProblem, LpVariable, LpMaximize, LpStatus, lpSum
-
-def rebalance_cycle(cycle, G):
-    # Build directed edges from cycle
+def reweight_cycle(cycle, G):
     edges = [(cycle[i], cycle[(i + 1) % len(cycle)]) for i in range(len(cycle))]
-
-    # Create LP problem
-    prob = LpProblem("CycleRebalancing", LpMaximize)
-    # prob = LpProblem("MidpointRebalancing", LpMaximize)
-
-    # Single flow variable
+    prob = LpProblem("MidpointRebalancing", LpMaximize)
     x = LpVariable("x", lowBound=0)
+    max_x_possible = []
 
-    # Constraints: For each edge, balance + delta*x in [0, capacity]
     for u, v in edges:
-        # delta = +1 in direction u->v, -1 in direction v->u
-        delta = 1
-        # b = balance[u][v]
-        # c = capacity[u][v]
-        b = G[u][v]['weight']
-        c = G[u][v]['capacity']
+        b_fwd = G[u][v]['weight']
+        c_fwd = G[u][v]['capacity']
+        b_rev = G[v][u]['weight']
+        c_rev = G[v][u]['capacity']
+        midpoint = c_fwd / 2
 
-        prob += b + delta * x <= c
-        prob += b + delta * x >= 0
+        if b_fwd < midpoint:
+            max_push = min(midpoint - b_fwd, b_rev)
+            prob += b_fwd + x <= midpoint
+            prob += b_rev - x >= 0
+            max_x_possible.append(max_push)
 
-    # Objective: maximize x
+        elif b_fwd > midpoint:
+            max_push = min(b_fwd - midpoint, c_rev - b_rev)
+            prob += b_fwd - x >= midpoint
+            prob += b_rev + x <= c_rev
+            max_x_possible.append(max_push)
+
+        else:
+            continue
+
     prob += x
+    if max_x_possible:
+        prob += x <= min(max_x_possible)
 
-    # Solve LP
     status = prob.solve()
     if LpStatus[status] == "Optimal" and x.varValue > 0:
-        # Apply update to balances
         flow = x.varValue
         for u, v in edges:
-            G[u][v]['weight'] += flow
-            G[v][u]['weight'] -= flow  # Subtract from reverse direction
+            b_fwd = G[u][v]['weight']
+            c_fwd = G[u][v]['capacity']
+            midpoint = c_fwd / 2
+
+            if b_fwd < midpoint:
+                G[u][v]['weight'] += flow
+                G[v][u]['weight'] -= flow
+            else:
+                G[u][v]['weight'] -= flow
+                G[v][u]['weight'] += flow
         return True, flow
+
     return False, 0
 
 def total_flow(cycles, G):
-    total_flow = 0
+    total = 0
     for cycle in cycles:
-        success, flow = rebalance_cycle(cycle, G)
+        success, flow = reweight_cycle(cycle, G)
         if success:
-            print(f"Rebalanced cycle {cycle} with flow {flow}")
-            total_flow += flow
-    print(f"Total rebalanced flow: {total_flow}")
-    return total_flow
+            aliases = [G.nodes[c].get("alias", c) for c in cycle]
+            print(f"Reweightd cycle {aliases} with flow {flow}")
+            total += flow
+    print(f"Total reweightd flow: {total}")
+    return total
+
+
+
+
+
+
 
 
 
@@ -88,13 +94,131 @@ def total_flow(cycles, G):
 
 
 # import networkx as nx
+
+# def find_cycles(G):
+#     # Assuming G is your directed graph
+#     cycles = list(nx.simple_cycles(G))
+
+#     # Filter cycles with length >= 3 (optional)
+#     valid_cycles = [cycle for cycle in cycles if len(cycle) >= 3]
+
+#     return valid_cycles
+# # print("Found cycles:")
+# # for c in valid_cycles:
+# #     print(c)
+
+
+# def find_cycles_with_depleted_edge(G):
+#     all_cycles = list(nx.simple_cycles(G))
+#     filtered_cycles = []
+
+#     for cycle in all_cycles:
+#         if len(cycle) < 3:
+#             continue  # skip short cycles
+
+#         # Build edge list for this cycle
+#         edges = [(cycle[i], cycle[(i + 1) % len(cycle)]) for i in range(len(cycle))]
+
+#         # Check if at least one edge has weight 0
+#         has_depleted_edge = any(G[u][v]['weight'] == 0 for u, v in edges)
+#         if has_depleted_edge:
+#             filtered_cycles.append(cycle)
+
+#     return filtered_cycles
+
+
+# from pulp import LpProblem, LpVariable, LpMaximize, LpStatus, lpSum
+
+# def reweight_cycle(cycle, G):
+#     # Build directed edges from cycle
+#     edges = [(cycle[i], cycle[(i + 1) % len(cycle)]) for i in range(len(cycle))]
+
+#     # Create LP problem
+#     # prob = LpProblem("CycleRebalancing", LpMaximize)
+#     prob = LpProblem("MidpointRebalancing", LpMaximize)
+
+#     # Single flow variable
+#     x = LpVariable("x", lowBound=0)
+
+#     max_x_possible = []
+
+#     # Constraints: For each edge, weight + delta*x in [0, capacity]
+#     for u, v in edges:
+#         # delta = +1 in direction u->v, -1 in direction v->u
+#         delta = 1
+#         # b = weight[u][v]
+#         # c = capacity[u][v]
+#         b = G[u][v]['weight']
+#         c = G[u][v]['capacity']
+#         midpoint = c / 2
+
+#         if b < midpoint:
+#             # Flow should increase weight
+#             max_push = midpoint - b
+#             prob += b + delta * x <= midpoint
+#             prob += b + delta * x >= 0
+#             max_x_possible.append(max_push)
+#         elif b > midpoint:
+#             # Flow should decrease weight
+#             max_push = b - midpoint
+#             prob += b - delta * x >= midpoint
+#             prob += b - delta * x <= c
+#             max_x_possible.append(max_push)
+#         else:
+#             continue
+
+#     # Objective: maximize x
+#     prob += x
+
+#     # Upper bound for x is minimum across all edges (to avoid overshooting midpoint)
+#     if max_x_possible:
+#         prob += x <= min(max_x_possible)
+
+
+#     # Solve LP
+#     status = prob.solve()
+#     if LpStatus[status] == "Optimal" and x.varValue > 0:
+#         flow = x.varValue
+#         for u, v in edges:
+#             b = G[u][v]['weight']
+#             c = G[u][v]['capacity']
+#             midpoint = int(c / 2)
+
+#             if b < midpoint:
+#                 G[u][v]['weight'] += flow
+#                 G[v][u]['weight'] -= flow
+#             else:
+#                 G[u][v]['weight'] -= flow
+#                 G[v][u]['weight'] += flow
+#         return True, flow
+#     return False, 0
+
+# def total_flow(cycles, G):
+#     total_flow = 0
+#     for cycle in cycles:
+#         success, flow = reweight_cycle(cycle, G)
+#         if success:
+#             a = []
+#             for c in cycle:
+#                 # print(c)
+#                 # print(G.nodes[c].get("alias", c))
+#                 a.append(G.nodes[c].get("alias", c))
+#             print(f"Reweightd cycle {a} with flow {flow}")
+#             total_flow += flow
+#     print(f"Total reweightd flow: {total_flow}")
+#     return total_flow
+
+
+
+
+# import networkx as nx
 # from scipy.optimize import linprog
 
-# class Rebalancer:
+# class Reweightr:
 #     def __init__(self, G):
 #         self.G = G  # G is a NetworkX DiGraph with capacity attributes
 
-#     def cyclic_rebalance(self):
+#     def cyclic_reweight(self):
 #         depleted_edges = [(u, v) for u, v, d in self.G.edges(data=True) if d.get('capacity', 1) == 0]
 #         all_cycles = self.find_all_cycles(limit=6)  # small cycles only for tractability
 
@@ -169,7 +293,7 @@ def total_flow(cycles, G):
 
 # # def optimize_flow_in_cycle(G, cycle):
 # #     """
-# #     Given a directed cycle, this sets up and solves an LP to rebalance the cycle.
+# #     Given a directed cycle, this sets up and solves an LP to reweight the cycle.
 # #     """
 # #     edges = [(cycle[i], cycle[(i + 1) % len(cycle)]) for i in range(len(cycle))]
 
@@ -205,7 +329,7 @@ def total_flow(cycles, G):
 # #         print(f"LP failed on cycle {cycle}: {res.message}")
 
 
-# # def rebalance_with_lp(G):
+# # def reweight_with_lp(G):
 # #     """
 # #     Finds simple cycles and applies LP-based rebalancing.
 # #     """

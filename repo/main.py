@@ -14,13 +14,14 @@ graph_display.draw_graph(G, pos, "Initial Graph")
 # cycles = rebalancer.find_cycles(G)
 # print(cycles)
 
-cycles2 = rebalancer.find_cycles_with_depleted_edge(G)
+cycles2 = rebalancer.reweight_cycle(G)
 print(cycles2)
 
 rebalance = rebalancer.total_flow(cycles2,G)
 print(rebalance)
 
-graph_display.draw_graph(G, pos, "Initial Graph")
+
+graph_display.draw_graph(G, pos, "Rebalanced Graph")
 
 # LP-based rebalancing
 # rb = rebalancer.Rebalancer(G)
