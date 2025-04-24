@@ -34,8 +34,11 @@ def graph_reader(path, bidirectional=False):
     for edge in data['edges']:
         u = edge['node1_pub']
         v = edge['node2_pub']
-        w = int(edge['weight'])
-        G.add_edge(u, v, weight=w)
+        # w = int(edge['weight'])
+        # G.add_edge(u, v, weight=w)
+        weight = int(edge['weight'])
+        capacity = int(edge['capacity'])
+        G.add_edge(u, v, weight=weight, capacity=capacity)
 
     # if bidirectional:
     #     # Ensure that every edge has a reverse direction

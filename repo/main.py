@@ -11,8 +11,19 @@ pos = nx.spring_layout(G, seed=42, k=1.5)
 
 graph_display.draw_graph(G, pos, "Initial Graph")
 
-# LP-based rebalancing
-rb = rebalancer.Rebalancer(G)
-rb.cyclic_rebalance()
+# cycles = rebalancer.find_cycles(G)
+# print(cycles)
 
-graph_display.draw_graph(G, pos, "After Rebalancing")
+cycles2 = rebalancer.find_cycles_with_depleted_edge(G)
+print(cycles2)
+
+rebalance = rebalancer.total_flow(cycles2,G)
+print(rebalance)
+
+graph_display.draw_graph(G, pos, "Initial Graph")
+
+# LP-based rebalancing
+# rb = rebalancer.Rebalancer(G)
+# rb.cyclic_rebalance()
+
+# graph_display.draw_graph(G, pos, "After Rebalancing")

@@ -191,6 +191,7 @@
                 "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296a",
                 "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
                 "weight": "200000",
+                "capacity": "200000",
                 "node1_policy": {
                     "time_lock_delta": 144,
                     "min_htlc": "1000",
@@ -213,6 +214,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296a",
             "weight": "0",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -235,6 +237,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296b",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
             "weight": "200000",
+            "capacity": "300000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -257,6 +260,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296b",
             "weight": "100000",
+            "capacity": "300000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -279,6 +283,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296d",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
             "weight": "200000",
+            "capacity": "250000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -301,6 +306,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296d",
             "weight": "50000",
+            "capacity": "250000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -323,6 +329,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296d",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "weight": "10000",
+            "capacity": "210000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -345,6 +352,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296d",
             "weight": "200000",
+            "capacity": "210000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -367,6 +375,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296e",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "weight": "70000",
+            "capacity": "140000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -389,6 +398,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296e",
             "weight": "70000",
+            "capacity": "140000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -411,6 +421,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296g",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "weight": "100000",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -433,6 +444,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296g",
             "weight": "100000",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -454,7 +466,8 @@
             "last_update": 1551875714,
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
-            "weight": "200000",
+            "weight": "0",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -477,6 +490,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "weight": "200000",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -492,13 +506,14 @@
                 "disabled": false
             }
         },
-        {
+            {
             "channel_id": "1_8",
             "chan_point": "18c3e6bc0bbbc50ad1e0f719e6ba84cda8f010074b5bdaa5b62b2874ca9fe937:0",
             "last_update": 1551875714,
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296i",
             "weight": "100000",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -521,6 +536,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296i",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "weight": "100000",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -543,6 +559,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296i",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "weight": "140000",
+            "capacity": "330000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -565,6 +582,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296i",
             "weight": "190000",
+            "capacity": "330000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -587,6 +605,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296g",
             "weight": "200000",
+            "capacity": "400000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -609,6 +628,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296g",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "weight": "200000",
+            "capacity": "400000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -631,6 +651,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296j",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296g",
             "weight": "1200000",
+            "capacity": "3300000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -653,6 +674,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296g",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296j",
             "weight": "2100000",
+            "capacity": "3300000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -675,6 +697,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296j",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "weight": "80000",
+            "capacity": "1290000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -697,6 +720,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296j",
             "weight": "49000",
+            "capacity": "129000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -719,6 +743,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296j",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296k",
             "weight": "250000",
+            "capacity": "450000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -741,6 +766,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296k",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296j",
             "weight": "200000",
+            "capacity": "450000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -763,6 +789,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296l",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296k",
             "weight": "200000",
+            "capacity": "400000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -785,6 +812,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296k",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296l",
             "weight": "200000",
+            "capacity": "400000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -807,6 +835,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296m",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296k",
             "weight": "100000",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -829,6 +858,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296k",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296m",
             "weight": "100000",
+            "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -851,6 +881,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296m",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296l",
             "weight": "200000",
+            "capacity": "250000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
@@ -873,6 +904,7 @@
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296l",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296m",
             "weight": "50000",
+            "capacity": "250000",
             "node1_policy": {
                 "time_lock_delta": 144,
                 "min_htlc": "1000",
