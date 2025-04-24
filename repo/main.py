@@ -16,8 +16,3 @@ rb = rebalancer.Rebalancer(G)
 rb.cyclic_rebalance()
 
 graph_display.draw_graph(G, pos, "After Rebalancing")
-
-
-rb.cyclic_rebalance()
-
-graph_display.draw_graph(G, pos, "After Rebalancing")
