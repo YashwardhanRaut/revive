@@ -5,12 +5,8 @@ import matplotlib.pyplot as plt
 def draw_graph(G, pos, title="Bidirectional Network Graph"):
     import matplotlib.pyplot as plt
     import networkx as nx
-
-    # More spread out layout
-    # pos = nx.spring_layout(G, seed=42, k=1.5)
-
+    
     plt.figure(figsize=(12, 8))
-
     # Draw nodes and alias labels
     nx.draw_networkx_nodes(G, pos, node_size=700)
     aliases = {node: G.nodes[node].get("alias", node) for node in G.nodes}
