@@ -8,9 +8,7 @@ def graph_reader(path, bidirectional=False):
     G = nx.DiGraph()
 
     for node in data["nodes"]:
-        G.add_node(node["pub_key"],
-                alias=node["alias"],
-                color=node["color"])
+        G.add_node(node["pub_key"],alias=node["alias"],color=node["color"],degree=0)
         
     for edge in data['edges']:
         u = edge['node1_pub']
@@ -18,6 +16,9 @@ def graph_reader(path, bidirectional=False):
         weight = int(edge['weight'])
         capacity = int(edge['capacity'])
         G.add_edge(u, v, weight=weight, capacity=capacity)
+        # G.nodes[u]['degree'] += 1
+        G.nodes[v]['degree'] += 1
+
 
     if bidirectional:
         # Ensure that every edge has a reverse direction

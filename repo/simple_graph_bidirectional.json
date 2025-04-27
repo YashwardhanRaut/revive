@@ -190,7 +190,7 @@
                 "last_update": 1551875714,
                 "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296a",
                 "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
-                "weight": "200000",
+                "weight": "100000",
                 "capacity": "200000",
                 "node1_policy": {
                     "time_lock_delta": 144,
@@ -213,7 +213,7 @@
             "last_update": 1551875714,
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296c",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296a",
-            "weight": "0",
+            "weight": "100000",
             "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
@@ -466,7 +466,7 @@
             "last_update": 1551875714,
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
-            "weight": "0",
+            "weight": "100000",
             "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
@@ -489,7 +489,7 @@
             "last_update": 1551875714,
             "node1_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296f",
             "node2_pub": "02008955e7da2d42f4753fe462333f8c7207140368937131a3d28897a3fc83296h",
-            "weight": "200000",
+            "weight": "100000",
             "capacity": "200000",
             "node1_policy": {
                 "time_lock_delta": 144,
