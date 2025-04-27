@@ -88,30 +88,30 @@ class DepletionSimulator:
         return improvement, stuck_nodes
 
 
-    def run_single_experiment_prime(self, depletion_percent):
-        """
-        Run one experiment: deplete, rebalance, measure improvement
-        """
-        G_copy = copy.deepcopy(self.G_original)
+    # def run_single_experiment_prime(self, depletion_percent):
+    #     """
+    #     Run one experiment: deplete, rebalance, measure improvement
+    #     """
+    #     G_copy = copy.deepcopy(self.G_original)
 
-        self.deplete_random_edges(G_copy, depletion_percent)
+    #     self.deplete_random_edges(G_copy, depletion_percent)
 
-        initial_dev = self.total_deviation(G_copy)
+    #     initial_dev = self.total_deviation(G_copy)
 
-        rebalance = rebalancer.GlobalReviveRebalancer(G_copy)
-        rebalance.run()
+    #     rebalance = rebalancer.GlobalReviveRebalancer(G_copy)
+    #     rebalance.run()
 
-        final_dev = self.total_deviation(G_copy)
+    #     final_dev = self.total_deviation(G_copy)
 
-        if initial_dev == 0:
-            return 0  # Avoid divide by zero
+    #     if initial_dev == 0:
+    #         return 0  # Avoid divide by zero
 
-        improvement = (initial_dev - final_dev) / initial_dev * 100
+    #     improvement = (initial_dev - final_dev) / initial_dev * 100
 
-        # pos = nx.spring_layout(G_copy, seed=42, k=1.5)
-        # graph_display.draw_graph(G_copy, pos, "Initial Graph")
+    #     # pos = nx.spring_layout(G_copy, seed=42, k=1.5)
+    #     # graph_display.draw_graph(G_copy, pos, "Initial Graph")
 
-        return improvement
+    #     return improvement
 
     def run_full_simulation(self, depletion_percents, repeats_per_percent=5):
         """
