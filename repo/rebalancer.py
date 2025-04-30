@@ -15,6 +15,26 @@ class GlobalReviveRebalancer:
         self.cycle_vars = {}
         self.deviation_vars = {}
 
+    def plot_stuck_nodes(self):
+        """
+        Plot stuck degree-1 nodes vs depletion percentage as a bar graph.
+        """
+        if not self.results_stuck:
+            print("No stuck node results to plot!")
+            return
+
+        percents = sorted(self.results_stuck.keys())
+        stuck_counts = [self.results_stuck[p] for p in percents]
+
+        plt.figure(figsize=(10,6))
+        plt.bar(percents, stuck_counts, color='orange', width=5)
+        plt.title('Stuck Degree-1 Nodes vs Channel Depletion')
+        plt.xlabel('Channel Depletion Percentage (%)')
+        plt.ylabel('Avg. Stuck Nodes (Deg=1, Depleted Outgoing)')
+        plt.grid(axis='y')
+        plt.show()
+
+
     def find_cycles(self):
         """
         Find all simple cycles up to a given length.
@@ -89,6 +109,30 @@ class GlobalReviveRebalancer:
                     self.G[u][v]['weight'] += flow_value
                 if self.G.has_edge(v, u):
                     self.G[v][u]['weight'] -= flow_value
+
+
+    def count_stuck_nodes_degree_one(self):
+        """
+        Count nodes that had degree == 1 and their single outgoing edge has weight == 0.
+        """
+        stuck = 0
+
+        for node in self.G.nodes:
+            degree = self.G.nodes[node].get('degree', 0)
+            if degree != 1:
+                continue  # Only count nodes with degree exactly 1
+
+            outgoing_edges = list(self.G.out_edges(node, data=True))
+            if len(outgoing_edges) != 1:
+                continue  # Must have exactly one outgoing edge
+
+            _, _, data = outgoing_edges[0]
+            if data['weight'] == 0:
+                stuck += 1
+
+        return stuck
+
+
 
     def run(self):
         """

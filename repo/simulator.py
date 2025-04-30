@@ -36,33 +36,6 @@ class DepletionSimulator:
             G[u][v]['weight'] = 0
             G[v][u]['weight'] += temp
 
-    def count_stuck_nodes(self, G):
-        """
-        Count number of nodes that have depleted channels and are not part of any cycle.
-        """
-        stuck_nodes = 0
-
-        # Find all simple cycles (up to max length, say 6)
-        all_cycles = list(nx.simple_cycles(G))
-
-        nodes_in_cycles = set()
-        for cycle in all_cycles:
-            for node in cycle:
-                nodes_in_cycles.add(node)
-
-        for node in G.nodes:
-            outgoing_edges = G.out_edges(node, data=True)
-
-            # Check if all outgoing edges are weight = 0
-            all_depleted = all(data['weight'] == 0 for _, _, data in outgoing_edges)
-
-            # If node is depleted and not part of any cycle -> stuck
-            if all_depleted and node not in nodes_in_cycles:
-                stuck_nodes += 1
-
-        return stuck_nodes
-
-
     def run_single_experiment(self, depletion_percent):
         """
         Run one experiment: deplete, rebalance, measure improvement, count stuck nodes.
@@ -71,7 +44,7 @@ class DepletionSimulator:
 
         self.deplete_random_edges(G_copy, depletion_percent)
 
-        stuck_nodes = self.count_stuck_nodes(G_copy)
+        # stuck_nodes = self.count_stuck_nodes(G_copy)
 
         initial_dev = self.total_deviation(G_copy)
 
@@ -79,6 +52,10 @@ class DepletionSimulator:
         rebalance.run()
 
         final_dev = self.total_deviation(G_copy)
+        stuck_nodes = rebalance.count_stuck_nodes_degree_one()
+
+        print(f"Depletion {depletion_percent}% → Stuck deg-1 nodes: {stuck_nodes}")
+
 
         if initial_dev == 0:
             improvement = 0
@@ -87,31 +64,6 @@ class DepletionSimulator:
 
         return improvement, stuck_nodes
 
-
-    # def run_single_experiment_prime(self, depletion_percent):
-    #     """
-    #     Run one experiment: deplete, rebalance, measure improvement
-    #     """
-    #     G_copy = copy.deepcopy(self.G_original)
-
-    #     self.deplete_random_edges(G_copy, depletion_percent)
-
-    #     initial_dev = self.total_deviation(G_copy)
-
-    #     rebalance = rebalancer.GlobalReviveRebalancer(G_copy)
-    #     rebalance.run()
-
-    #     final_dev = self.total_deviation(G_copy)
-
-    #     if initial_dev == 0:
-    #         return 0  # Avoid divide by zero
-
-    #     improvement = (initial_dev - final_dev) / initial_dev * 100
-
-    #     # pos = nx.spring_layout(G_copy, seed=42, k=1.5)
-    #     # graph_display.draw_graph(G_copy, pos, "Initial Graph")
-
-    #     return improvement
 
     def run_full_simulation(self, depletion_percents, repeats_per_percent=5):
         """
@@ -147,18 +99,3 @@ class DepletionSimulator:
 
 
         print(self.results_stuck)
-
-
-        # """
-        # Plot stuck nodes count vs depletion percentage as a bar graph.
-        # """
-        # percents = sorted(self.results_stuck.keys())
-        # stuck_counts = [self.results_stuck[p] for p in percents]
-
-        # plt.figure(figsize=(10,6))
-        # plt.bar(percents, stuck_counts, color='red', width=5)
-        # plt.title('On-Chain Operations Needed vs Channel Depletion')
-        # plt.xlabel('Channel Depletion Percentage (%)')
-        # plt.ylabel('Average Stuck Nodes (Need On-Chain)')
-        # plt.grid(axis='y')
-        # plt.show()
